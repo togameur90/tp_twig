@@ -1,0 +1,51 @@
+{% extends "gabarit.twig" %}
+
+{% block titre %}
+	Page d'accueil -
+	{{ produits.collection }}
+	{{ produits.annee }}
+{% endblock %}
+
+{% block contenu %}
+	<h1>Selection
+		{{ produits.collection }}
+		{{ produits.annee }}</h1>
+
+	<section class="produits">
+		{% for tshirts in produits.tshirts %}
+			<article class="prod">
+				<div class="figure">
+					<img src="medias/{{ tshirts.image }}" alt="produit {{ tshirts.nom }}">
+				</div>
+				<div class="desc">
+					<h2>
+						<a href="afficheProduit.php?id={{ tshirts.id }}">{{ tshirts.nom }}</a>
+					</h2>
+					<p class="prix">
+						{{ tshirts.prix }}€
+						<span class="promotion">
+							{% if tshirts.promo %}
+								<span class="promo">(promotion)</span>
+							{% endif %}
+						</span>
+					</p>
+					<p class="description">
+						<strong>Modèle
+							{{ tshirts.categorie }}.</strong>
+						{{ tshirts.description }}
+					</p>
+				</div>
+				<div class="notation">
+					{% for i in 1 .. tshirts.notation %}
+						<span class="StarOn">★</span>
+					{% endfor %}
+					{% for i in 1 .. 5 %}
+						{% if i > tshirts.notation %}
+							<span class="StarOff">☆</span>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</article>
+		{% endfor %}
+	</section>
+</div></div>{% endblock %}
